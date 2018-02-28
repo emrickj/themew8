@@ -1,1 +1,10 @@
-remote_theme: ndrewtl/airspace-jekyll
+title: Website Name
+collections:
+  webpages:
+    output: true
+defaults:
+  - scope:
+      path: ""
+      type: webpages
+    values:
+      layout: page
