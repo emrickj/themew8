@@ -1,96 +1,71 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>{{ site.title | default: site.github.repository_name }}</title>
 <style>
-@media (max-width: 767px) {
-	body {background: linear-gradient(to right, rgba(191,255,255,1), rgba(191,255,255,0), rgba(191,255,255,1))};
-}
-@media (min-width: 576px) {
-	form label {text-align: right;}
-}
-#grad {
-  background: linear-gradient(to right, rgba(191,255,255,1), rgba(191,255,255,0));
-}
-#title {
-  color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+@media (min-width: 601px) {
+	.label {text-align: right; padding-top: 8px; padding-right: 10px;}
 }
 
 
    </style>
 </head>
-<body id="demo" onload="setHeight();" onresize="setHeight();">
-<div class="d-block d-md-none">
-<nav class="navbar bg-light navbar-light fixed-top">
-  <a class="navbar-brand" href="http://www.gem-editor.com/gwc/theme1b4g.php">{{ site.title | default: site.github.repository_name }}</a>
-  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
-	<span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="navbar-nav">
-	{% for item in site.webpages %}
-		{% assign bs = "" %}
-		{% if page.url == item.url %}
-		    {% assign bs = " active" %}
-		{% endif %}
-        <li class='nav-item'><a class='nav-link{{ bs }}' href='{{ item.url | relative_url }}'>{{ item.title }}</a></li>
-	{% endfor %}
-	</ul>
-  </div>
-</nav>
+<body>
+
+<div class="w3-container w3-blue w3-center">
+  <h1 style="text-shadow:1px 1px 0 #444">{{ site.title | default: site.github.repository_name }}</h1>
 </div>
-   <div class="container-fluid">
-      <div class="d-block d-md-none" style="padding-top: 50px;"></div>
-      <div class="row">
-         <div class="col-md-3 d-none d-md-block" id="grad">
-		    <div class="container">
-		          <div style="padding: 20px" id="title">
-				     <b><h2><center>{{ site.title | default: site.github.repository_name }}</center></h2></b>
-				  </div>
-                  <br>
-                  <div class="btn-group-vertical btn-group-lg bg-light rounded">
-                {% for item in site.webpages %}
-                  {% assign bs = "" %}
-                  {% if page.url == item.url %}
-                      {% assign bs = " active" %}
-                  {% endif %}
-                      <a href='{{ item.url | relative_url }}' class='btn btn-outline-primary{{ bs }}'>{{ item.title }}</a>
-                {% endfor %}
-                  </div>
-                  <br>
-                  <br>
-			</div>
-         </div>
-         <div class="col-md-9" style="padding-top: 20px;padding-bottom: 20px;">
-           <div class="card bg-dark text-white">
-                 {% if page.image_url %}
-		             <img class='card-img-top' src='{{ page.image_url | relative url }}'>
-		             {% endif %}
-               <div class="card-body">
-					 {{ content }}
-               </div>
-				<div class="card-footer bg-light text-dark">
-					<center>This theme along with others can be found on <a href="https://github.com/emrickj/jekyll-themes">GITHUB</a>.</center>
-				</div>			   
-           </div>
-         </div>
-      </div>
-   </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
+
+<!-- Navigation bar -->
+<div class="w3-bar w3-black">
+{% for item in site.webpages %}
+	{% assign bs = "" %}
+	{% if page.url == item.url %}
+		{% assign bs = " w3-gray" %}
+	{% endif %}
+	<a href='{{ item.url | relative_url }}' class='w3-bar-item w3-button w3-hide-small{{ bs }}'>{{ item.title }}</a>
+{% endfor %}
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+</div>
+<div id="demo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
+{% for item in site.webpages %}
+	{% assign bs = "" %}
+	{% if page.url == item.url %}
+		{% assign bs = " w3-gray" %}
+	{% endif %}
+	<a href='{{ item.url | relative_url }}' class='w3-bar-item w3-button{{ bs }}'>{{ item.title }}</a>
+{% endfor %}
+</div>
+
+<!-- Page Content -->
+<div class="w3-main">
+
+{% if page.image_url %}
+<img class='w3-image' src='{{ page.image_url | relative url }}' style='width:100%'>
+{% endif %}
+
+<div class="w3-container">
+{{ content }}
+</div>
+<div class="w3-container w3-light-grey w3-center">
+    <h6>This theme along with others can be found on <a href="https://github.com/emrickj/jekyll-themes">GITHUB</a>.</h6>
+</div>
+</div>
+
 <script>
 
-function setHeight() {
-$(".container").css("height","initial");
-if ($(".container").height() < window.innerHeight)
-   $(".container").height(window.innerHeight);
+function myFunction() {
+    var x = document.getElementById("demo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
 }
 </script>
+
+</body>
 </html>
